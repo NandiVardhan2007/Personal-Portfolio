@@ -3,8 +3,10 @@ import '@/styles/globals.css';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { SmoothScrollProvider } from '@/providers/SmoothScrollProvider';
 import { ThemeAwareClickSpark } from '@/components/ui/ThemeAwareClickSpark';
-import { ChatBot } from '@/components/layout/ChatBot';
-import { ConsoleEasterEgg } from '@/components/layout/ConsoleEasterEgg';
+import dynamic from 'next/dynamic';
+
+const ChatBot = dynamic(() => import('@/components/layout/ChatBot').then((mod) => mod.ChatBot), { ssr: false });
+const ConsoleEasterEgg = dynamic(() => import('@/components/layout/ConsoleEasterEgg').then((mod) => mod.ConsoleEasterEgg), { ssr: false });
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
