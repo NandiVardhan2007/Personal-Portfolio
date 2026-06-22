@@ -47,7 +47,7 @@ function SocialTicker() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group relative flex h-[130px] w-[220px] sm:w-[260px] flex-shrink-0 flex-col justify-between rounded-3xl border border-border bg-secondary/40 p-6 transition-all hover:bg-secondary hover:-translate-y-1"
+                            className="group relative flex h-[100px] sm:h-[130px] w-[200px] sm:w-[260px] flex-shrink-0 flex-col justify-between rounded-2xl sm:rounded-3xl border border-border bg-secondary/40 p-4 sm:p-6 transition-all hover:bg-secondary hover:-translate-y-1"
                         >
                             <div className="absolute -top-6 -right-6 p-6 opacity-[0.04] group-hover:opacity-10 transition-opacity">
                                 <Icon className="w-32 h-32" />
@@ -61,7 +61,7 @@ function SocialTicker() {
                                     <span className="text-xs text-muted-foreground">@{item.username}</span>
                                 </div>
                             </div>
-                            <div className="relative z-10 flex items-center justify-between pt-3 border-t border-border">
+                            <div className="relative z-10 flex items-center justify-between pt-2 sm:pt-3 border-t border-border">
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60">Connect</span>
                                 <ExternalLink className="w-3 h-3 text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity" />
                             </div>

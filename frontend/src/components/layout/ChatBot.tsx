@@ -276,8 +276,7 @@ function ChatWindow({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 16 }}
             transition={{ type: 'spring', damping: 24, stiffness: 320 }}
-            className="fixed z-50 flex flex-col bottom-24 right-4 md:right-8 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[80vh] rounded-2xl shadow-2xl overflow-hidden bg-background border border-border backdrop-blur-xl"
-            style={{ maxWidth: '420px' }}
+            className="fixed z-50 flex flex-col bottom-0 right-0 w-full sm:bottom-24 sm:right-4 md:right-8 sm:w-[380px] h-[85vh] sm:h-[520px] max-h-[85vh] sm:max-h-[80vh] rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-clip bg-background border border-border backdrop-blur-xl max-w-full sm:max-w-[420px]"
         >
             <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-foreground/[0.03] flex-shrink-0">
                 <div className="flex items-center gap-2.5">
@@ -307,7 +306,7 @@ function ChatWindow({
                 </div>
             </div>
 
-            <div ref={scrollContainerRef} onScroll={handleScroll} className="flex-1 overflow-y-auto px-3.5 py-4 space-y-4">
+            <div ref={scrollContainerRef} onScroll={handleScroll} data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain touch-pan-y px-3.5 py-4 space-y-4">
                 {messages.map((msg, idx) => (
                     <MessageBubble key={msg.id} message={msg} onRetry={msg.error && idx === messages.length - 1 ? retry : undefined} />
                 ))}

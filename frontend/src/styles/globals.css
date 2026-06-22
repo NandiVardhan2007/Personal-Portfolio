@@ -72,6 +72,12 @@
         border-radius: 4px;
     }
 
+    @media (max-width: 640px) {
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+    }
+
     /* Visible keyboard focus ring everywhere, without adding an outline to
        mouse/touch interactions (:focus-visible already does that distinction). */
     :focus-visible {

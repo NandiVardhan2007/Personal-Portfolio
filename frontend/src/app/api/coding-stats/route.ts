@@ -1,23 +1,7 @@
 import { NextResponse } from 'next/server';
 
-const DEFAULT_BACKEND_URL = 'https://personal-portfolio-u9e1.onrender.com';
-
-function toOrigin(value: string | undefined) {
-    if (!value?.trim()) return null;
-    try {
-        return new URL(value.trim()).origin;
-    } catch {
-        return null;
-    }
-}
-
-function getBackendBaseUrl(value: string | undefined) {
-    const origin = toOrigin(value);
-    const frontendOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL);
-    return origin && origin !== frontendOrigin ? origin : DEFAULT_BACKEND_URL;
-}
-
-const BASE_URL = getBackendBaseUrl(process.env.CODING_STATS_API_URL);
+/** Read exclusively from env — never hardcode a backend URL in source. */
+const BASE_URL = process.env.CODING_STATS_API_URL?.trim();
 
 export const dynamic = 'force-dynamic';
 
@@ -27,11 +11,6 @@ export const dynamic = 'force-dynamic';
  * HackerRank/GeeksforGeeks fields showing up swapped — if the upstream `/api/stats`
  * response ever puts GFG-shaped data under the "hackerrank" key (or vice versa), the
  * UI still lands on the right card.
- *
- * I couldn't reach personal-portfolio-u9e1.onrender.com from the sandbox this was built in (it's
- * not on the egress allowlist), so this is a defensive best-guess rather than a fix
- * verified against your live response. If stats still look wrong after this, send me
- * the raw JSON from /api/stats and I'll match the exact field names precisely.
  */
 type PlatformBlock = Record<string, unknown> | null | undefined;
 type Platform = 'leetcode' | 'codechef' | 'hackerrank' | 'gfg';
@@ -72,6 +51,13 @@ function normalize(raw: unknown): Record<Platform, PlatformBlock> | unknown {
 }
 
 export async function GET() {
+    if (!BASE_URL) {
+        return NextResponse.json(
+            { ok: false, error: 'Service Unavailable: CODING_STATS_API_URL environment variable is not configured.' },
+            { status: 503 }
+        );
+    }
+
     try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 8000);

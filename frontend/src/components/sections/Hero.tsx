@@ -115,7 +115,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                     </div>
 
                     {/* Line 2 */}
-                    <div className="md:flex gap-8 items-center relative">
+                    <div className="flex flex-col md:flex-row gap-8 items-center relative">
                         <div className="relative">
                             <div ref={linkedinRef} className="absolute -top-8 left-4 text-primary/60 hover:text-primary z-20 opacity-0">
                                 <a href={social('LinkedIn')} target="_blank" rel="noopener noreferrer" className="block">
@@ -131,7 +131,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3rem,11vw,13rem)] md:flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(3rem,11vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 <span>AUTO</span>
                                 <div ref={zapRef} className="mx-[0.05em]">
@@ -143,12 +143,12 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                     </div>
 
                     {/* Line 3 */}
-                    <div className="md:flex gap-8 items-center relative">
+                    <div className="flex flex-col md:flex-row gap-8 items-center relative">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-[clamp(3rem,11vw,13rem)] md:flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                            className="text-[clamp(3rem,11vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                         >
                             <span>EN</span>
                             <div ref={botRef} className="mx-[0.05em] relative">
@@ -168,8 +168,8 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                     </div>
                 </div>
 
-                <div className="mx-auto max-w-[105rem] w-full px-8 md:px-20 mt-12 md:mt-24">
-                    <div className="flex items-center gap-6">
+                <div className="mx-auto max-w-[105rem] w-full px-4 md:px-20 mt-12 md:mt-24">
+                    <div className="flex flex-col sm:flex-row items-center gap-6">
                         <Separator className="flex-1 h-[1px] bg-foreground/10 hidden md:block" />
                         <div className="text-[10px] md:text-xs whitespace-nowrap font-bold tracking-[0.3em] text-muted-foreground uppercase">
                             ANDHRA PRADESH, IN — 2026

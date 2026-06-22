@@ -52,7 +52,7 @@ function persist(messages: ChatMessage[]) {
 
 /**
  * Chat state + send/retry logic, talking to /api/nim (which proxies the real
- * backend at personal-portfolio-u9e1.onrender.com/api/nim).
+ * backend).
  *
  * Two things this hook owns that the UI doesn't need to know about:
  *  - Persistence: history is saved to sessionStorage on every change and reloaded
@@ -155,7 +155,11 @@ export function useChatbot() {
 
                 if (!res.ok) {
                     const errData = await res.json().catch(() => null);
-                    throw new Error(errData?.error || errData?.details || 'Something went wrong — please try again.');
+                    let errMsg = errData?.error || errData?.details || 'Something went wrong — please try again.';
+                    if (res.status === 429) errMsg = 'Too many requests. Please slow down and try again later.';
+                    if (res.status === 503) errMsg = 'The AI service is currently unavailable. Please try again later.';
+                    if (res.status === 504) errMsg = 'The backend took too long to respond. Please try again.';
+                    throw new Error(errMsg);
                 }
 
                 if (!res.body) throw new Error('No response stream from server.');

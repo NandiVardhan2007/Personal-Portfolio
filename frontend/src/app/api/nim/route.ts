@@ -1,25 +1,9 @@
 import { NextResponse } from 'next/server';
 import { buildSystemPrompt } from '@/lib/chatbotContext';
 
-const DEFAULT_BACKEND_URL = 'https://personal-portfolio-u9e1.onrender.com';
-
-function toOrigin(value: string | undefined) {
-    if (!value?.trim()) return null;
-    try {
-        return new URL(value.trim()).origin;
-    } catch {
-        return null;
-    }
-}
-
-function getBackendBaseUrl(value: string | undefined) {
-    const origin = toOrigin(value);
-    const frontendOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL);
-    return origin && origin !== frontendOrigin ? origin : DEFAULT_BACKEND_URL;
-}
-
-const BASE_URL = getBackendBaseUrl(process.env.NIM_API_URL);
-const NIM_ENDPOINT = `${BASE_URL}/api/nim`;
+/** Read exclusively from env — never hardcode a backend URL in source. */
+const BASE_URL = process.env.NIM_API_URL?.trim();
+const NIM_ENDPOINT = BASE_URL ? `${BASE_URL}/api/nim` : '';
 
 interface NimMessage {
     role: 'system' | 'user' | 'assistant';
@@ -29,7 +13,7 @@ interface NimMessage {
 export const dynamic = 'force-dynamic';
 
 /**
- * Proxies to the real backend at personal-portfolio-u9e1.onrender.com/api/nim.
+ * Proxies to the real backend's /api/nim endpoint.
  *
  * Important: that backend holds its own NIM_API_KEY server-side — per its docs,
  * it returns 500 "NIM_API_KEY is not configured on the server" if ITS key is
@@ -43,6 +27,13 @@ export const dynamic = 'force-dynamic';
  * reply if the client didn't specify it.
  */
 export async function POST(req: Request) {
+    if (!BASE_URL) {
+        return NextResponse.json(
+            { error: 'Service Unavailable: NIM_API_URL environment variable is not configured.' },
+            { status: 503 }
+        );
+    }
+
     let body: { messages?: NimMessage[]; model?: string; temperature?: number; max_tokens?: number; stream?: boolean };
     try {
         body = await req.json();
@@ -81,8 +72,10 @@ export async function POST(req: Request) {
         });
         clearTimeout(timeout);
     } catch (err: unknown) {
-        const details = err instanceof Error ? err.message : 'Network error reaching the backend.';
-        return NextResponse.json({ error: 'NIM API request failed.', details }, { status: 502 });
+        if (err instanceof Error && err.name === 'AbortError') {
+            return NextResponse.json({ error: 'The backend took too long to respond. Please try again.' }, { status: 504 });
+        }
+        return NextResponse.json({ error: 'Network error reaching the backend. Please try again later.' }, { status: 502 });
     }
 
     if (!upstream.ok) {

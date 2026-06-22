@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/providers/ThemeProvider';
 import { SmoothScrollProvider } from '@/providers/SmoothScrollProvider';
 import { ThemeAwareClickSpark } from '@/components/ui/ThemeAwareClickSpark';
 import { ChatBot } from '@/components/layout/ChatBot';
+import { ConsoleEasterEgg } from '@/components/layout/ConsoleEasterEgg';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <ThemeProvider>
                     <SmoothScrollProvider>
                         <ThemeAwareClickSpark>
+                            <ConsoleEasterEgg />
                             <Navbar />
                             <main>{children}</main>
                             <Footer />

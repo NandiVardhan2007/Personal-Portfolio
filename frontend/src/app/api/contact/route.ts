@@ -1,29 +1,9 @@
 import { NextResponse } from 'next/server';
 
-const DEFAULT_BACKEND_URL = 'https://personal-portfolio-u9e1.onrender.com';
-
-function toOrigin(value: string | undefined) {
-    if (!value?.trim()) return null;
-    try {
-        return new URL(value.trim()).origin;
-    } catch {
-        return null;
-    }
-}
-
-function getBackendBaseUrl(...values: Array<string | undefined>) {
-    const frontendOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL);
-
-    for (const value of values) {
-        const origin = toOrigin(value);
-        if (origin && origin !== frontendOrigin) return origin;
-    }
-
-    return DEFAULT_BACKEND_URL;
-}
-
-const BASE_URL = getBackendBaseUrl(process.env.CONTACT_API_URL, process.env.NIM_API_URL);
-const CONTACT_ENDPOINT = `${BASE_URL}/api/contact`;
+/** Read exclusively from env — never hardcode a backend URL in source.
+ *  Falls back to NIM_API_URL since they're typically the same backend. */
+const BASE_URL = process.env.CONTACT_API_URL?.trim() || process.env.NIM_API_URL?.trim();
+const CONTACT_ENDPOINT = BASE_URL ? `${BASE_URL}/api/contact` : '';
 
 interface ContactPayload {
     name?: string;
@@ -46,6 +26,13 @@ export const dynamic = 'force-dynamic';
  * We relay that shape straight through rather than reinventing it.
  */
 export async function POST(req: Request) {
+    if (!BASE_URL) {
+        return NextResponse.json(
+            { error: 'Service Unavailable: CONTACT_API_URL environment variable is not configured.' },
+            { status: 503 }
+        );
+    }
+
     let body: ContactPayload;
     try {
         body = await req.json();
@@ -94,10 +81,17 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Backend returned an unexpected response.' }, { status: 502 });
         }
 
+        const headers = new Headers();
+        ['x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-reset'].forEach((h) => {
+            if (upstream.headers.has(h)) headers.set(h, upstream.headers.get(h)!);
+        });
+
         // Relay the backend's own status code and shape (200 success / 207 partial / 400 validation).
-        return NextResponse.json(data, { status: upstream.status });
+        return NextResponse.json(data, { status: upstream.status, headers });
     } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Unknown error reaching the contact backend.';
-        return NextResponse.json({ error: message }, { status: 502 });
+        if (err instanceof Error && err.name === 'AbortError') {
+            return NextResponse.json({ error: 'The backend took too long to respond. Please try again.' }, { status: 504 });
+        }
+        return NextResponse.json({ error: 'Network error reaching the backend. Please try again later.' }, { status: 502 });
     }
 }

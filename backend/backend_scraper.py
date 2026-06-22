@@ -22,6 +22,25 @@ CORS(app)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    logger.exception(f"Unhandled exception: {e}")
+    return jsonify({"error": "Internal Server Error", "details": str(e)}), 500
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"error": "Route not found"}), 404
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+    return jsonify({"error": "Method not allowed"}), 405
+
+@app.before_request
+def limit_request_size():
+    if request.content_length and request.content_length > 10 * 1024 * 1024:
+        return jsonify({"error": "Request body too large"}), 413
+
+
 # ---------- Config ----------
 LEETCODE_USERNAME   = os.environ.get("LEETCODE_USERNAME",   "Nandu_2007_")
 CODECHEF_USERNAME   = os.environ.get("CODECHEF_USERNAME",   "nandu_2007")
