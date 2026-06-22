@@ -56,6 +56,9 @@ async function fetchWithToken(): Promise<GitHubStatsResult> {
       }
     }`;
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
     const res = await fetch('https://api.github.com/graphql', {
         method: 'POST',
         headers: {
@@ -65,7 +68,9 @@ async function fetchWithToken(): Promise<GitHubStatsResult> {
         },
         body: JSON.stringify({ query }),
         cache: 'no-store',
+        signal: controller.signal,
     });
+    clearTimeout(timeout);
 
     const json: GraphQLResponse = await res.json();
     if (json.errors?.length) throw new Error(json.errors[0].message);
@@ -86,13 +91,18 @@ async function fetchWithToken(): Promise<GitHubStatsResult> {
 }
 
 async function fetchPublic(): Promise<GitHubStatsResult> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
     const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
         cache: 'no-store',
         headers: {
             'User-Agent': `${GITHUB_USERNAME}-portfolio`,
             Accept: 'application/vnd.github+json',
         },
+        signal: controller.signal,
     });
+    clearTimeout(timeout);
     if (!res.ok) throw new Error(`GitHub user lookup failed (${res.status})`);
     const u: GitHubUserResponse = await res.json();
 
