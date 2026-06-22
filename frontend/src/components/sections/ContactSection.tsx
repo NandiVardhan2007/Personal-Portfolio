@@ -154,11 +154,11 @@ export function ContactSection() {
                 />
 
                 <div className="mt-12 lg:mt-16 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16">
-                    <Reveal>
+                    <Reveal className="min-w-0">
                         <ContactCTA />
                     </Reveal>
 
-                    <Reveal delay={0.1} className="space-y-10 lg:space-y-12">
+                    <Reveal delay={0.1} className="space-y-10 lg:space-y-12 min-w-0">
                         <div>
                             <p className="eyebrow mb-5">Elsewhere</p>
                             <SocialTicker />
