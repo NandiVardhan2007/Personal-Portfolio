@@ -79,21 +79,21 @@ function ContactCTA() {
     const { email } = portfolioData.personal;
 
     return (
-        <div className="glass-card p-8 md:p-10 flex flex-col gap-6">
-            <p className="text-xl md:text-2xl font-bold text-foreground leading-snug">
+        <div className="glass-card p-6 sm:p-8 md:p-10 flex flex-col gap-6">
+            <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground leading-snug">
                 Got a project, an internship, or just want to say hi? The full contact form lives on its own page.
             </p>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6">
                 <Link
                     href="/contact"
-                    className="group inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-full font-bold text-sm px-7 py-4 hover:scale-105 active:scale-95 transition-transform"
+                    className="group inline-flex justify-center w-full sm:w-auto items-center gap-2 bg-primary text-primary-foreground rounded-full font-bold text-sm px-7 py-4 hover:scale-105 active:scale-95 transition-transform"
                 >
                     Go to Contact Page
                     <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
                 </Link>
                 <a
                     href={`mailto:${email}`}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors w-full sm:w-auto justify-center sm:justify-start py-2 sm:py-0"
                 >
                     <Mail size={15} /> {email}
                 </a>
@@ -152,12 +152,12 @@ export function ContactSection() {
                     description="Open to internships, collaborations, and interesting problems worth solving."
                 />
 
-                <div className="mt-16 grid lg:grid-cols-[1.1fr_0.9fr] gap-16">
+                <div className="mt-12 lg:mt-16 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16">
                     <Reveal>
                         <ContactCTA />
                     </Reveal>
 
-                    <Reveal delay={0.1} className="space-y-12">
+                    <Reveal delay={0.1} className="space-y-10 lg:space-y-12">
                         <div>
                             <p className="eyebrow mb-5">Elsewhere</p>
                             <SocialTicker />
