@@ -47,7 +47,13 @@ export function ContactPageClient() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
-            const data: ContactResponse = await res.json();
+            const responseText = await res.text();
+            let data: ContactResponse = {};
+            try {
+                data = responseText ? JSON.parse(responseText) : {};
+            } catch {
+                throw new Error(responseText || 'The contact backend returned an invalid response.');
+            }
 
             if (res.status === 400 || !res.ok && res.status !== 207) {
                 throw new Error(data.error || 'Something went wrong.');

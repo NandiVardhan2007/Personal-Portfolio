@@ -1,6 +1,28 @@
 import { NextResponse } from 'next/server';
 
-const BASE_URL = process.env.CONTACT_API_URL || process.env.NIM_API_URL || 'https://personal-portfolio-u9e1.onrender.com';
+const DEFAULT_BACKEND_URL = 'https://personal-portfolio-u9e1.onrender.com';
+
+function toOrigin(value: string | undefined) {
+    if (!value?.trim()) return null;
+    try {
+        return new URL(value.trim()).origin;
+    } catch {
+        return null;
+    }
+}
+
+function getBackendBaseUrl(...values: Array<string | undefined>) {
+    const frontendOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL);
+
+    for (const value of values) {
+        const origin = toOrigin(value);
+        if (origin && origin !== frontendOrigin) return origin;
+    }
+
+    return DEFAULT_BACKEND_URL;
+}
+
+const BASE_URL = getBackendBaseUrl(process.env.CONTACT_API_URL, process.env.NIM_API_URL);
 const CONTACT_ENDPOINT = `${BASE_URL}/api/contact`;
 
 interface ContactPayload {
@@ -56,7 +78,17 @@ export async function POST(req: Request) {
         });
         clearTimeout(timeout);
 
-        const data = await upstream.json().catch(() => null);
+        const upstreamText = await upstream.text();
+        let data: Record<string, unknown> | null = null;
+        try {
+            data = upstreamText ? JSON.parse(upstreamText) as Record<string, unknown> : null;
+        } catch {
+            const message = upstreamText.trim() || upstream.statusText || 'Unknown upstream response';
+            return NextResponse.json(
+                { error: `Contact backend returned ${upstream.status}: ${message}` },
+                { status: upstream.ok ? 502 : upstream.status }
+            );
+        }
 
         if (!data) {
             return NextResponse.json({ error: 'Backend returned an unexpected response.' }, { status: 502 });

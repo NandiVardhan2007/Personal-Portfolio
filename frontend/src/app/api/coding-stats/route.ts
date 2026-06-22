@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server';
 
-const BASE_URL = process.env.CODING_STATS_API_URL || 'https://personal-portfolio-u9e1.onrender.com';
+const DEFAULT_BACKEND_URL = 'https://personal-portfolio-u9e1.onrender.com';
+
+function toOrigin(value: string | undefined) {
+    if (!value?.trim()) return null;
+    try {
+        return new URL(value.trim()).origin;
+    } catch {
+        return null;
+    }
+}
+
+function getBackendBaseUrl(value: string | undefined) {
+    const origin = toOrigin(value);
+    const frontendOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL);
+    return origin && origin !== frontendOrigin ? origin : DEFAULT_BACKEND_URL;
+}
+
+const BASE_URL = getBackendBaseUrl(process.env.CODING_STATS_API_URL);
 
 export const dynamic = 'force-dynamic';
 
