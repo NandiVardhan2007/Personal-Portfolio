@@ -8,9 +8,17 @@ export function ResumeButton({ children, className }: { children: ReactNode; cla
     const [open, setOpen] = useState(false);
     const { personal } = portfolioData;
 
+    const handleClick = () => {
+        if (window.innerWidth <= 768) {
+            window.open(personal.resumeUrl, '_blank');
+        } else {
+            setOpen(true);
+        }
+    };
+
     return (
         <>
-            <button onClick={() => setOpen(true)} className={className} type="button">
+            <button onClick={handleClick} className={className} type="button">
                 {children}
             </button>
             <PDFViewerModal

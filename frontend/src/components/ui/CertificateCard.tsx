@@ -10,10 +10,19 @@ export function CertificateCard({ achievement, className = '' }: { achievement: 
     const [open, setOpen] = useState(false);
     const canExpand = Boolean(achievement.pdfUrl);
 
+    const handleClick = () => {
+        if (!canExpand) return;
+        if (window.innerWidth <= 768) {
+            window.open(achievement.pdfUrl!, '_blank');
+        } else {
+            setOpen(true);
+        }
+    };
+
     return (
         <>
             <button
-                onClick={() => canExpand && setOpen(true)}
+                onClick={handleClick}
                 disabled={!canExpand}
                 className={`text-left glass-card overflow-hidden group w-full ${canExpand ? 'cursor-pointer' : 'cursor-default'} ${className}`}
             >

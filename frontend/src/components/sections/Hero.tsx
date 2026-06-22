@@ -88,26 +88,26 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
             <main className="relative flex-1 flex flex-col justify-center pt-40 pb-20 z-10">
                 <div className="flex relative gap-4 px-6 md:items-center w-full flex-col justify-center">
                     {/* Line 1 */}
-                    <div className="md:flex gap-8 items-center relative">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center relative">
                         <motion.p
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-[10px] md:text-xs text-muted-foreground text-start md:text-right leading-relaxed max-w-[200px] md:max-w-[220px] font-medium uppercase tracking-[0.2em]"
+                            className="text-[10px] md:text-xs text-muted-foreground text-center md:text-right leading-relaxed max-w-[280px] md:max-w-[220px] font-medium uppercase tracking-[0.2em] mb-2 md:mb-0"
                         >
                             Hi, I&apos;m {personal.nickname}. I build practical software, automations, and AI assistants.
                         </motion.p>
                         <div className="relative">
-                            <div ref={githubRef} className="absolute -top-4 right-0 md:right-2 text-primary/60 hover:text-primary z-20 opacity-0">
+                            <div ref={githubRef} className="absolute -top-6 right-2 md:-top-4 md:right-2 text-primary/60 hover:text-primary z-20 opacity-0">
                                 <a href={social('GitHub')} target="_blank" rel="noopener noreferrer" className="block">
-                                    <Github size={32} />
+                                    <Github size={28} className="md:w-8 md:h-8" />
                                 </a>
                             </div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3rem,11vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(3rem,12vw,13rem)] text-center md:text-left font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 SOFTWARE
                             </motion.h1>
@@ -115,23 +115,23 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                     </div>
 
                     {/* Line 2 */}
-                    <div className="flex flex-col md:flex-row gap-8 items-center relative">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center relative">
                         <div className="relative">
-                            <div ref={linkedinRef} className="absolute -top-8 left-4 text-primary/60 hover:text-primary z-20 opacity-0">
+                            <div ref={linkedinRef} className="absolute -top-6 left-0 md:-top-8 md:left-4 text-primary/60 hover:text-primary z-20 opacity-0">
                                 <a href={social('LinkedIn')} target="_blank" rel="noopener noreferrer" className="block">
-                                    <Linkedin size={32} />
+                                    <Linkedin size={28} className="md:w-8 md:h-8" />
                                 </a>
                             </div>
-                            <div ref={instagramRef} className="absolute -bottom-12 right-24 md:right-36 text-primary/60 hover:text-primary z-20 opacity-0">
+                            <div ref={instagramRef} className="absolute -bottom-8 right-6 md:-bottom-12 md:right-36 text-primary/60 hover:text-primary z-20 opacity-0">
                                 <a href={social('Instagram')} target="_blank" rel="noopener noreferrer" className="block">
-                                    <Instagram size={32} />
+                                    <Instagram size={28} className="md:w-8 md:h-8" />
                                 </a>
                             </div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3rem,11vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(3rem,12vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 <span>AUTO</span>
                                 <div ref={zapRef} className="mx-[0.05em]">
@@ -143,12 +143,12 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                     </div>
 
                     {/* Line 3 */}
-                    <div className="flex flex-col md:flex-row gap-8 items-center relative">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center relative">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-[clamp(3rem,11vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                            className="text-[clamp(3rem,12vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                         >
                             <span>EN</span>
                             <div ref={botRef} className="mx-[0.05em] relative">
@@ -161,7 +161,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-[10px] md:text-xs text-muted-foreground pt-4 md:pt-8 leading-relaxed max-w-[250px] md:max-w-[200px] font-medium uppercase tracking-widest"
+                            className="text-[10px] md:text-xs text-muted-foreground text-center md:text-left mt-2 md:mt-0 pt-0 md:pt-8 leading-relaxed max-w-[280px] md:max-w-[200px] font-medium uppercase tracking-widest"
                         >
                             Open to internships, collaborations, and interesting problems to solve.
                         </motion.p>

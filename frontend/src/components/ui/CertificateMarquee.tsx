@@ -7,18 +7,28 @@ import { FileText } from 'lucide-react';
 import { Achievement } from '@/types';
 import { PDFViewerModal } from './PDFViewerModal';
 
-type ColumnProps = { items: Achievement[]; y: MotionValue<number>; onSelect: (a: Achievement) => void };
+type ColumnProps = { items: Achievement[]; y: MotionValue<number>; onSelect: (a: Achievement) => void; className?: string };
 
-function Column({ items, y, onSelect }: ColumnProps) {
+function Column({ items, y, onSelect, className = '' }: ColumnProps) {
     return (
         <motion.div
-            className="relative -top-[45%] flex h-full w-1/3 min-w-[200px] flex-col gap-[2vw] md:gap-[3vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-65%] will-change-transform"
+            className={`relative flex h-full flex-1 flex-col gap-[4vw] md:gap-[3vw] will-change-transform ${className}`}
             style={{ y, translateZ: 0 }}
         >
-            {items.map((item) => (
+            {items.map((item) => {
+                const handleClick = () => {
+                    if (!item.pdfUrl) return;
+                    if (window.innerWidth <= 768) {
+                        window.open(item.pdfUrl, '_blank');
+                    } else {
+                        onSelect(item);
+                    }
+                };
+                
+                return (
                 <button
                     key={item.id}
-                    onClick={() => item.pdfUrl && onSelect(item)}
+                    onClick={handleClick}
                     className="group relative w-full overflow-hidden rounded-2xl bg-secondary ring-1 ring-border text-left"
                     style={{ paddingTop: '75%' }}
                 >
@@ -43,7 +53,8 @@ function Column({ items, y, onSelect }: ColumnProps) {
                         {item.title}
                     </span>
                 </button>
-            ))}
+                );
+            })}
         </motion.div>
     );
 }
@@ -55,12 +66,12 @@ function Column({ items, y, onSelect }: ColumnProps) {
  */
 function buildColumns(achievements: Achievement[]): [Achievement[], Achievement[], Achievement[]] {
     const n = achievements.length;
-    const perColumn = 6;
+    const perColumn = 12;
 
     if (n === 0) return [[], [], []];
 
     const rotate = (offset: number) =>
-        Array.from({ length: Math.min(perColumn, n) }, (_, i) => achievements[(offset + i) % n]);
+        Array.from({ length: perColumn }, (_, i) => achievements[(offset + i) % n]);
 
     // Stagger each column's starting point so the three columns don't show
     // identical sequences even when n < perColumn.
@@ -95,10 +106,10 @@ export function CertificateMarquee({ achievements }: { achievements: Achievement
 
     return (
         <>
-            <div ref={gallery} className="relative box-border flex h-[90vh] md:h-[120vh] gap-[2vw] md:gap-[3vw] overflow-hidden rounded-3xl">
-                <Column items={colA} y={y} onSelect={setSelected} />
-                <Column items={colB} y={y2} onSelect={setSelected} />
-                <Column items={colC} y={y3} onSelect={setSelected} />
+            <div ref={gallery} className="relative box-border flex h-[75vh] md:h-[120vh] gap-[4vw] md:gap-[3vw] overflow-hidden rounded-3xl">
+                <Column items={colA} y={y} onSelect={setSelected} className="-top-[45%]" />
+                <Column items={colB} y={y2} onSelect={setSelected} className="-top-[95%]" />
+                <Column items={colC} y={y3} onSelect={setSelected} className="-top-[65%] hidden md:flex" />
             </div>
 
             <PDFViewerModal

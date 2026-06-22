@@ -95,7 +95,8 @@ function ContactCTA() {
                     href={`mailto:${email}`}
                     className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors w-full sm:w-auto justify-center sm:justify-start py-2 sm:py-0"
                 >
-                    <Mail size={15} /> {email}
+                    <Mail size={15} className="shrink-0" /> 
+                    <span className="break-all text-center sm:text-left">{email}</span>
                 </a>
             </div>
         </div>
