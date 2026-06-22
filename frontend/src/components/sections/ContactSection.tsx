@@ -147,7 +147,7 @@ export function ContactSection() {
                     eyebrow="Get In Touch"
                     title={
                         <>
-                            Let&apos;s build something <span className="text-shiny">together</span>.
+                            Let&apos;s build something <span className="whitespace-nowrap"><span className="text-shiny">together</span>.</span>
                         </>
                     }
                     description="Open to internships, collaborations, and interesting problems worth solving."

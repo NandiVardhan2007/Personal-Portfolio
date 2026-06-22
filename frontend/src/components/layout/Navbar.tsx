@@ -125,7 +125,7 @@ export function Navbar() {
         >
             <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2">
-                    <span className="font-black text-lg tracking-tight text-foreground">Nandu.</span>
+                    <span className="font-black text-lg tracking-tight leading-none text-foreground mt-[2px]">Nandu.</span>
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8">
@@ -155,7 +155,7 @@ export function Navbar() {
                 <div className="md:hidden flex items-center gap-2">
                     <Link
                         href="/contact"
-                        className="text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-border text-foreground"
+                        className="hidden sm:inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-border text-foreground"
                     >
                         Contact
                     </Link>
@@ -185,6 +185,13 @@ export function Navbar() {
                                     {l.label}
                                 </Link>
                             ))}
+                            <Link
+                                href="/contact"
+                                onClick={() => setIsMenuOpen(false)}
+                                className="text-sm font-bold uppercase tracking-widest text-foreground mt-2 inline-block"
+                            >
+                                Contact
+                            </Link>
                         </div>
                     </motion.nav>
                 )}
