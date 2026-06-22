@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const BASE_URL = process.env.CODING_STATS_API_URL || 'https://python-pfww.onrender.com';
+const BASE_URL = process.env.CODING_STATS_API_URL || 'https://personal-portfolio-u9e1.onrender.com';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
  * response ever puts GFG-shaped data under the "hackerrank" key (or vice versa), the
  * UI still lands on the right card.
  *
- * I couldn't reach python-pfww.onrender.com from the sandbox this was built in (it's
+ * I couldn't reach personal-portfolio-u9e1.onrender.com from the sandbox this was built in (it's
  * not on the egress allowlist), so this is a defensive best-guess rather than a fix
  * verified against your live response. If stats still look wrong after this, send me
  * the raw JSON from /api/stats and I'll match the exact field names precisely.

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { buildSystemPrompt } from '@/lib/chatbotContext';
 
-const BASE_URL = process.env.NIM_API_URL || 'https://python-pfww.onrender.com';
+const BASE_URL = process.env.NIM_API_URL || 'https://personal-portfolio-u9e1.onrender.com';
 const NIM_ENDPOINT = `${BASE_URL}/api/nim`;
 
 interface NimMessage {
@@ -12,7 +12,7 @@ interface NimMessage {
 export const dynamic = 'force-dynamic';
 
 /**
- * Proxies to the real backend at python-pfww.onrender.com/api/nim.
+ * Proxies to the real backend at personal-portfolio-u9e1.onrender.com/api/nim.
  *
  * Important: that backend holds its own NIM_API_KEY server-side — per its docs,
  * it returns 500 "NIM_API_KEY is not configured on the server" if ITS key is

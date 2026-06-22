@@ -52,7 +52,7 @@ function persist(messages: ChatMessage[]) {
 
 /**
  * Chat state + send/retry logic, talking to /api/nim (which proxies the real
- * backend at python-pfww.onrender.com/api/nim).
+ * backend at personal-portfolio-u9e1.onrender.com/api/nim).
  *
  * Two things this hook owns that the UI doesn't need to know about:
  *  - Persistence: history is saved to sessionStorage on every change and reloaded

@@ -21,7 +21,7 @@ Copy `.env.local.example` to `.env.local` (already done for you) and fill in rea
 
 ```bash
 GITHUB_TOKEN=             # optional — raises GitHub stats rate limit 60/hr → 5,000/hr
-CODING_STATS_API_URL=     # optional — defaults to https://python-pfww.onrender.com
+CODING_STATS_API_URL=     # optional — defaults to https://personal-portfolio-u9e1.onrender.com
 NIM_API_URL=              # optional — same default backend, chatbot endpoint
 CONTACT_API_URL=          # optional — same default backend, contact-form endpoint
 NEXT_PUBLIC_SITE_URL=     # set once deployed — used for sitemap/robots/OG tags
@@ -46,7 +46,7 @@ chat as compromised.
 
 ## The three backend integrations
 
-All three point at `https://python-pfww.onrender.com` by default (override via the env vars
+All three point at `https://personal-portfolio-u9e1.onrender.com` by default (override via the env vars
 above if it ever moves):
 
 | Route | Real endpoint | What it does |
@@ -57,7 +57,7 @@ above if it ever moves):
 | `/api/contact` | `POST /api/contact` | Proxies the real backend (AI auto-reply via NIM → Brevo email → notification email), relaying its `200`/`207`/`400` response shape as-is |
 
 None of these were end-to-end testable against the live backend from the sandbox this was built
-in (`python-pfww.onrender.com` isn't on its network allowlist). I built local mock servers
+in (`personal-portfolio-u9e1.onrender.com` isn't on its network allowlist). I built local mock servers
 replicating each documented contract exactly and tested the full chain (route → proxy →
 client parsing) against those — confirmed correct, but worth a real smoke test once deployed.
 

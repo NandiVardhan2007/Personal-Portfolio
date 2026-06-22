@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const BASE_URL = process.env.CONTACT_API_URL || process.env.NIM_API_URL || 'https://python-pfww.onrender.com';
+const BASE_URL = process.env.CONTACT_API_URL || process.env.NIM_API_URL || 'https://personal-portfolio-u9e1.onrender.com';
 const CONTACT_ENDPOINT = `${BASE_URL}/api/contact`;
 
 interface ContactPayload {
