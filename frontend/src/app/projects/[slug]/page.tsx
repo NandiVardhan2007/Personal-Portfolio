@@ -113,7 +113,9 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                                 <div className="grid sm:grid-cols-2 gap-4">
                                     {project.gallery.map((src) =>
                                         src.endsWith('.mp4') ? (
-                                            <video key={src} src={src} controls className="w-full rounded-2xl border border-border" />
+                                            <video key={src} src={src} controls aria-label="Project demonstration video" className="w-full rounded-2xl border border-border">
+                                                <track kind="captions" label="No captions available" />
+                                            </video>
                                         ) : (
                                             <div key={src} className="relative aspect-video rounded-2xl overflow-hidden border border-border">
                                                 <Image src={src} alt={`${project.title} screenshot`} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />

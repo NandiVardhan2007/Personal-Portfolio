@@ -62,7 +62,7 @@ export function ProfileCard(props: ProfileCardProps) {
             height={480}
             className='w-full h-full object-cover'
             draggable={false}
-            priority
+            loading='lazy'
           />
         </div>
         {/* Overlapping Card - Rectangular & Centered */}
@@ -119,7 +119,7 @@ export function ProfileCard(props: ProfileCardProps) {
             height={400}
             className='w-full h-full object-cover'
             draggable={false}
-            priority
+            loading='lazy'
           />
         </div>
 

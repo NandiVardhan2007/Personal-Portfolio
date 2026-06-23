@@ -15,11 +15,20 @@ export default function BlogPage() {
                     description="Technical writing, tutorials, and reflections on building software."
                 />
                 
-                <div className="mt-16 text-center py-20 border border-border border-dashed rounded-3xl bg-secondary/20">
-                    <h3 className="text-xl font-bold text-foreground mb-2">Coming Soon</h3>
-                    <p className="text-muted-foreground max-w-sm mx-auto">
-                        I&apos;m currently writing my first few articles. Check back soon for technical content and tutorials!
-                    </p>
+                <div className="mt-16 relative w-full max-w-2xl mx-auto">
+                    {/* Glowing background orbs */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="absolute w-64 h-64 bg-glow-cyan/20 blur-[80px] rounded-full animate-glow-pulse" />
+                        <div className="absolute w-64 h-64 bg-glow-purple/20 blur-[80px] rounded-full animate-glow-pulse translate-x-20" />
+                    </div>
+
+                    <div className="relative text-center py-24 px-6 border border-border rounded-[2.5rem] glass-card overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-glow-cyan/[0.03] via-transparent to-glow-purple/[0.03] pointer-events-none" />
+                        <h3 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-glow-cyan to-glow-purple mb-4 tracking-tight">Coming Soon</h3>
+                        <p className="text-muted-foreground max-w-md mx-auto leading-relaxed relative z-10">
+                            I&apos;m currently writing my first few articles. Check back soon for technical content, deep dives, and tutorials!
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

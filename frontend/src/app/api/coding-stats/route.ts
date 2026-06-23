@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 /** Read exclusively from env — never hardcode a backend URL in source. */
 const BASE_URL = process.env.CODING_STATS_API_URL?.trim();
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 /**
  * Identify a platform's data block by the fields it actually contains, rather than
@@ -64,7 +64,6 @@ export async function GET() {
 
         const res = await fetch(`${BASE_URL}/api/stats`, {
             signal: controller.signal,
-            cache: 'no-store',
         });
         clearTimeout(timeout);
 

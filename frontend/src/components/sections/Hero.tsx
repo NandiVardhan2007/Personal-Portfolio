@@ -28,6 +28,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
             </div>
 
             <main className="relative flex-1 flex flex-col justify-center pt-40 pb-20 z-10">
+                <h1 className="sr-only">Software Automation Engineer</h1>
                 <div className="flex relative gap-4 px-6 md:items-center w-full flex-col justify-center">
                     {/* Line 1 */}
                     <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center relative">
@@ -50,14 +51,16 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                                     <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-primary">GitHub</span>
                                 </a>
                             </motion.div>
-                            <motion.h1
+                            <motion.div
+                                aria-hidden="true"
+                                role="presentation"
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(2.5rem,10vw,13rem)] text-center md:text-left font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(2.5rem,8vw,11rem)] text-center md:text-left font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 SOFTWARE
-                            </motion.h1>
+                            </motion.div>
                         </div>
                     </div>
 
@@ -83,11 +86,13 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                                     <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-primary">Instagram</span>
                                 </a>
                             </motion.div>
-                            <motion.h1
+                            <motion.div
+                                aria-hidden="true"
+                                role="presentation"
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(2.5rem,10vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(2.5rem,8vw,11rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 <span>AUTO</span>
                                 <motion.div
@@ -98,17 +103,19 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                                     <Zap className="w-[0.8em] h-[0.8em] text-sky-400" strokeWidth={1.5} />
                                 </motion.div>
                                 <span>MATION</span>
-                            </motion.h1>
+                            </motion.div>
                         </div>
                     </div>
 
                     {/* Line 3 */}
                     <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center relative">
-                        <motion.h1
+                        <motion.div
+                            aria-hidden="true"
+                            role="presentation"
                             initial={{ opacity: 0, y: 30 }}
                             animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-[clamp(2.5rem,10vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                            className="text-[clamp(2.5rem,8vw,11rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                         >
                             <span>EN</span>
                             <motion.div
@@ -119,7 +126,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                                 <Bot className="w-[0.85em] h-[0.85em] text-yellow-500 fill-yellow-500/10" />
                             </motion.div>
                             <span>GINEER</span>
-                        </motion.h1>
+                        </motion.div>
 
                         <motion.p
                             initial={{ opacity: 0, x: 20 }}
@@ -139,11 +146,11 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                             ANDHRA PRADESH, IN — {currentYear}
                         </div>
                         <ResumeButton className="group flex items-center">
-                            <motion.div className="relative flex items-center bg-zinc-100 dark:bg-white h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-smooth-out overflow-hidden shadow-xl">
-                                <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-[10px] font-black uppercase tracking-widest text-zinc-900 dark:text-black pl-6 pr-12">
+                            <motion.div className="relative flex items-center bg-zinc-100 dark:bg-white h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-smooth-out overflow-hidden shadow-xl border border-transparent group-hover:border-blue-500/30 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-[10px] font-black uppercase tracking-widest text-zinc-900 dark:text-black group-hover:text-blue-600 dark:group-hover:text-blue-600 pl-6 pr-12">
                                     View Resume
                                 </span>
-                                <div className="absolute right-0 flex items-center justify-center size-12 text-zinc-900 dark:text-black group-hover:rotate-45 transition-transform duration-500">
+                                <div className="absolute right-0 flex items-center justify-center size-12 text-zinc-900 dark:text-black group-hover:rotate-45 transition-transform duration-500 group-hover:text-blue-600 dark:group-hover:text-blue-600">
                                     <ArrowDownRight className="w-5 h-5" />
                                 </div>
                             </motion.div>
@@ -152,7 +159,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                 </div>
 
                 <div
-                    className="absolute left-0 top-1/2 z-50 flex items-center transform -translate-y-1/2"
+                    className="absolute left-0 top-1/2 z-50 hidden md:flex items-center transform -translate-y-1/2"
                     onMouseEnter={() => setShowProfile(true)}
                     onMouseLeave={() => setShowProfile(false)}
                     onClick={() => setShowProfile(!showProfile)}

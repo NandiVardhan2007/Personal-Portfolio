@@ -14,12 +14,13 @@
         --secondary: 0 0% 96%;
         --secondary-foreground: 0 0% 9%;
         --muted: 0 0% 96%;
-        --muted-foreground: 0 0% 35%;
+        --muted-foreground: 0 0% 30%;
         --accent: 0 0% 96%;
         --accent-foreground: 0 0% 9%;
         --border: 0 0% 90%;
         --ring: 0 0% 9%;
         --radius: 0.5rem;
+        --brand-accent: 220 70% 50%;
     }
 
     .dark {
@@ -38,6 +39,7 @@
         --accent-foreground: 0 0% 98%;
         --border: 0 0% 20%;
         --ring: 0 0% 85%;
+        --brand-accent: 220 80% 60%;
     }
 }
 
@@ -54,11 +56,12 @@
     body {
         @apply bg-background text-foreground antialiased;
         font-feature-settings: 'rlig' 1, 'calt' 1;
-        overflow-x: clip;
+        overflow-x: hidden;
     }
 
     ::selection {
         @apply bg-primary/20 text-foreground;
+        background-color: hsl(var(--brand-accent) / 0.2);
     }
 
     ::-webkit-scrollbar {
@@ -123,14 +126,14 @@
 
     .text-shiny {
         @apply bg-clip-text text-transparent;
-        background-image: linear-gradient(120deg, #171717 30%, #888 50%, #171717 70%);
+        background-image: linear-gradient(120deg, #171717 30%, hsl(var(--brand-accent)) 50%, #171717 70%);
         background-size: 200% auto;
         animation: text-shiny 4s linear infinite;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
     .dark .text-shiny {
-        background-image: linear-gradient(120deg, #ffffff 30%, #666 50%, #ffffff 70%);
+        background-image: linear-gradient(120deg, #ffffff 30%, hsl(var(--brand-accent)) 50%, #ffffff 70%);
     }
 
     @keyframes text-shiny {

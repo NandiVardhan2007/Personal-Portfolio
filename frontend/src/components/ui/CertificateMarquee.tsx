@@ -29,6 +29,7 @@ function Column({ items, y, onSelect, className = '' }: ColumnProps) {
                 <button
                     key={item.id}
                     onClick={handleClick}
+                    aria-label={`View certificate for ${item.title}`}
                     className="group relative w-full overflow-hidden rounded-2xl bg-secondary ring-1 ring-border text-left"
                     style={{ paddingTop: '75%' }}
                 >
@@ -40,6 +41,7 @@ function Column({ items, y, onSelect, className = '' }: ColumnProps) {
                             fill
                             sizes="(max-width: 1024px) 50vw, 33vw"
                             className="pointer-events-none object-cover"
+                            loading="lazy"
                         />
                     )}
                     {item.pdfUrl && (

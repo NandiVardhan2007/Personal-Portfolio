@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 const GITHUB_USERNAME = 'NandiVardhan2007';
 const TOKEN = process.env.GITHUB_TOKEN;
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 interface GitHubStatsResult {
     followers: number | null;
@@ -67,7 +67,6 @@ async function fetchWithToken(): Promise<GitHubStatsResult> {
             'User-Agent': `${GITHUB_USERNAME}-portfolio`,
         },
         body: JSON.stringify({ query }),
-        cache: 'no-store',
         signal: controller.signal,
     });
     clearTimeout(timeout);
@@ -95,7 +94,6 @@ async function fetchPublic(): Promise<GitHubStatsResult> {
     const timeout = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-        cache: 'no-store',
         headers: {
             'User-Agent': `${GITHUB_USERNAME}-portfolio`,
             Accept: 'application/vnd.github+json',

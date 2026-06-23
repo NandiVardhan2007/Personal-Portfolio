@@ -32,8 +32,8 @@ function SocialTicker() {
     const items = [...socialLinks, ...socialLinks];
 
     return (
-        <div className="relative w-full overflow-hidden py-2 select-none group">
-            <div className="flex gap-4 flex-nowrap animate-marquee group-hover:[animation-play-state:paused] w-max">
+        <div className="relative w-full overflow-x-auto md:overflow-hidden py-4 select-none group snap-x snap-mandatory pb-6 md:pb-2">
+            <div className="flex gap-4 flex-nowrap md:animate-marquee md:group-hover:[animation-play-state:paused] w-max px-4 md:px-0">
                 {items.map((item, idx) => {
                     const Icon = ICONS[item.icon] ?? Github;
                     return (
@@ -42,7 +42,7 @@ function SocialTicker() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group relative flex h-[100px] sm:h-[130px] w-[200px] sm:w-[260px] flex-shrink-0 flex-col justify-between rounded-2xl sm:rounded-3xl border border-border bg-secondary/40 p-4 sm:p-6 transition-all hover:bg-secondary hover:-translate-y-1"
+                            className="group relative flex h-[100px] sm:h-[130px] w-[200px] sm:w-[260px] flex-shrink-0 flex-col justify-between rounded-2xl sm:rounded-3xl border border-border bg-secondary/40 p-4 sm:p-6 transition-all hover:bg-secondary hover:-translate-y-1 snap-center"
                         >
                             <div className="absolute -top-6 -right-6 p-6 opacity-[0.04] group-hover:opacity-10 transition-opacity">
                                 <Icon className="w-32 h-32" />
@@ -78,10 +78,20 @@ function ContactCTA() {
             <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground leading-snug">
                 Got a project, an internship, or just want to say hi? Send me a quick message below.
             </p>
-            <form className="flex flex-col gap-4 w-full" onSubmit={(e) => { e.preventDefault(); alert("Form submission goes here!"); }}>
-                <input type="email" placeholder="Your email address" required className="bg-secondary/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full" />
-                <textarea placeholder="How can I help you?" required rows={3} className="bg-secondary/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full resize-none"></textarea>
-                <button type="submit" className="w-full bg-primary text-primary-foreground font-bold text-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity">
+            <form 
+                className="flex flex-col gap-4 w-full" 
+                onSubmit={(e) => { 
+                    e.preventDefault(); 
+                    const formData = new FormData(e.currentTarget);
+                    const userEmail = formData.get('email');
+                    const message = formData.get('message');
+                    const body = `Sender Email: ${userEmail}\n\nMessage:\n${message}`;
+                    window.location.href = `mailto:${email}?subject=Portfolio Contact Request&body=${encodeURIComponent(body)}`;
+                }}
+            >
+                <input name="email" type="email" placeholder="Your email address" required className="bg-secondary/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full" />
+                <textarea name="message" placeholder="How can I help you?" required rows={3} className="bg-secondary/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full resize-none"></textarea>
+                <button type="submit" className="w-full bg-blue-600 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-blue-700 transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]">
                     Send Message
                 </button>
             </form>
@@ -91,7 +101,7 @@ function ContactCTA() {
             <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6">
                 <Link
                     href="/contact"
-                    className="group inline-flex justify-center w-full sm:w-auto items-center gap-2 border border-border bg-secondary text-foreground rounded-full font-bold text-sm px-7 py-3 hover:bg-secondary/80 transition-colors"
+                    className="group inline-flex justify-center w-full sm:w-auto items-center gap-2 border border-blue-500/30 bg-blue-500/5 text-foreground rounded-full font-bold text-sm px-7 py-3 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm hover:shadow-[0_0_15px_rgba(37,99,235,0.4)]"
                 >
                     Full Contact Form
                     <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />

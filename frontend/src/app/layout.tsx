@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { SmoothScrollProvider } from '@/providers/SmoothScrollProvider';
@@ -37,6 +37,15 @@ export const metadata: Metadata = {
     },
 };
 
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+    ],
+};
 const personJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',

@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import GitHubCalendar from 'react-github-calendar';
+import dynamic from 'next/dynamic';
+
+const GitHubCalendar = dynamic(() => import('react-github-calendar'), {
+    ssr: false,
+    loading: () => <div className="w-full h-[150px] bg-foreground/5 rounded-lg animate-pulse" />
+});
 import { Github, Loader2, AlertTriangle, Flame, ExternalLink, RefreshCcw, Star } from 'lucide-react';
 import { SiLeetcode, SiCodechef, SiHackerrank, SiGeeksforgeeks } from 'react-icons/si';
 import { SectionHeading } from '@/components/ui/SectionHeading';

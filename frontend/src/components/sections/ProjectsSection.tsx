@@ -277,7 +277,7 @@ function FeaturedSpotlight({ project }: { project: Project }) {
                         ))}
                     </div>
 
-                    <span className="inline-flex items-center gap-2 font-bold text-sm pt-2 group-hover:gap-3 transition-all">
+                    <span className="inline-flex items-center gap-2 font-bold text-sm pt-2 group-hover:gap-3 transition-all text-blue-600 dark:text-blue-400">
                         Explore the build <ArrowRight size={16} />
                     </span>
                 </div>
@@ -321,7 +321,7 @@ export function ProjectsSection() {
                     </div>
                     <Link
                         href="/projects"
-                        className="text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-border rounded-full px-4 sm:px-5 py-2 sm:py-2.5 hover:bg-secondary transition-colors shrink-0"
+                        className="text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-border rounded-full px-4 sm:px-5 py-2 sm:py-2.5 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shrink-0 shadow-sm hover:shadow-[0_0_15px_rgba(37,99,235,0.4)]"
                     >
                         All Projects →
                     </Link>
