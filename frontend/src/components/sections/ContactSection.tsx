@@ -32,8 +32,8 @@ function SocialTicker() {
     const items = [...socialLinks, ...socialLinks];
 
     return (
-        <div className="relative w-full overflow-x-auto md:overflow-hidden py-4 select-none group snap-x snap-mandatory pb-6 md:pb-2">
-            <div className="flex gap-4 flex-nowrap md:animate-marquee md:group-hover:[animation-play-state:paused] w-max px-4 md:px-0">
+        <div className="relative w-full overflow-hidden py-4 select-none group pb-6 md:pb-2">
+            <div className="flex gap-4 flex-nowrap animate-marquee group-hover:[animation-play-state:paused] w-max px-4 md:px-0">
                 {items.map((item, idx) => {
                     const Icon = ICONS[item.icon] ?? Github;
                     return (
@@ -42,7 +42,7 @@ function SocialTicker() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group relative flex h-[100px] sm:h-[130px] w-[200px] sm:w-[260px] flex-shrink-0 flex-col justify-between rounded-2xl sm:rounded-3xl border border-border bg-secondary/40 p-4 sm:p-6 transition-all hover:bg-secondary hover:-translate-y-1 snap-center"
+                            className="group relative flex h-[100px] sm:h-[130px] w-[200px] sm:w-[260px] flex-shrink-0 flex-col justify-between rounded-2xl sm:rounded-3xl border border-border bg-secondary/40 p-4 sm:p-6 transition-all hover:bg-secondary hover:-translate-y-1"
                         >
                             <div className="absolute -top-6 -right-6 p-6 opacity-[0.04] group-hover:opacity-10 transition-opacity">
                                 <Icon className="w-32 h-32" />
