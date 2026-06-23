@@ -18,7 +18,7 @@ export default function BlogPage() {
                 <div className="mt-16 text-center py-20 border border-border border-dashed rounded-3xl bg-secondary/20">
                     <h3 className="text-xl font-bold text-foreground mb-2">Coming Soon</h3>
                     <p className="text-muted-foreground max-w-sm mx-auto">
-                        I'm currently writing my first few articles. Check back soon for technical content and tutorials!
+                        I&apos;m currently writing my first few articles. Check back soon for technical content and tutorials!
                     </p>
                 </div>
             </div>
