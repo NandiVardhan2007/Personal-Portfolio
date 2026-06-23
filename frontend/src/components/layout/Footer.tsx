@@ -23,10 +23,10 @@ function Marquee() {
         <div className="relative flex overflow-hidden py-4 bg-secondary/40 border-y border-border">
             <motion.div
                 className="flex gap-12 whitespace-nowrap"
-                animate={{ x: [0, -1000] }}
+                animate={{ x: ['0%', '-50%'] }}
                 transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
             >
-                {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((word, i) => (
+                {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((word, i) => (
                     <div key={i} className="flex items-center gap-4 text-sm font-mono tracking-widest uppercase text-muted-foreground/80">
                         <span>{word}</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />

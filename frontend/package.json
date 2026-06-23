@@ -16,7 +16,6 @@
     "clsx": "^2.1.1",
     "cross-env": "^10.1.0",
     "framer-motion": "^11.11.17",
-    "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "lucide-react": "^0.460.0",
     "next": "14.2.35",
@@ -30,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@types/node": "^20.17.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

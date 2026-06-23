@@ -23,7 +23,7 @@ export function ProfessionalStats() {
                     description="Still climbing — these numbers move every month."
                 />
 
-                <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5">
+                <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {items.map((item, i) => (
                         <Reveal key={item.label} delay={i * 0.08} className="glass-card p-8 md:p-10 text-center">
                             <div className="font-black text-4xl md:text-5xl text-shiny">

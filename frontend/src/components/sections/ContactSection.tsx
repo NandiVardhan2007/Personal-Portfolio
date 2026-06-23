@@ -32,13 +32,8 @@ function SocialTicker() {
     const items = [...socialLinks, ...socialLinks];
 
     return (
-        <div className="relative w-full overflow-hidden py-2 select-none">
-            <motion.div
-                className="flex gap-4 flex-nowrap"
-                animate={{ x: ['0%', '-50%'] }}
-                transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
-                style={{ width: 'max-content' }}
-            >
+        <div className="relative w-full overflow-hidden py-2 select-none group">
+            <div className="flex gap-4 flex-nowrap animate-marquee group-hover:[animation-play-state:paused] w-max">
                 {items.map((item, idx) => {
                     const Icon = ICONS[item.icon] ?? Github;
                     return (
@@ -68,7 +63,7 @@ function SocialTicker() {
                         </a>
                     );
                 })}
-            </motion.div>
+            </div>
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
         </div>
@@ -81,14 +76,24 @@ function ContactCTA() {
     return (
         <div className="glass-card p-6 sm:p-8 md:p-10 flex flex-col gap-6">
             <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground leading-snug">
-                Got a project, an internship, or just want to say hi? The full contact form lives on its own page.
+                Got a project, an internship, or just want to say hi? Send me a quick message below.
             </p>
+            <form className="flex flex-col gap-4 w-full" onSubmit={(e) => { e.preventDefault(); alert("Form submission goes here!"); }}>
+                <input type="email" placeholder="Your email address" required className="bg-secondary/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full" />
+                <textarea placeholder="How can I help you?" required rows={3} className="bg-secondary/50 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full resize-none"></textarea>
+                <button type="submit" className="w-full bg-primary text-primary-foreground font-bold text-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity">
+                    Send Message
+                </button>
+            </form>
+            <div className="flex items-center gap-4 mt-2">
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold">OR</span>
+            </div>
             <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6">
                 <Link
                     href="/contact"
-                    className="group inline-flex justify-center w-full sm:w-auto items-center gap-2 bg-primary text-primary-foreground rounded-full font-bold text-sm px-7 py-4 hover:scale-105 active:scale-95 transition-transform"
+                    className="group inline-flex justify-center w-full sm:w-auto items-center gap-2 border border-border bg-secondary text-foreground rounded-full font-bold text-sm px-7 py-3 hover:bg-secondary/80 transition-colors"
                 >
-                    Go to Contact Page
+                    Full Contact Form
                     <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
                 </Link>
                 <a

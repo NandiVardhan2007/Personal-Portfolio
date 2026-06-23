@@ -71,18 +71,18 @@ function ProjectListRow({
     const bgGradient = useMotionTemplate`radial-gradient(600px circle at ${mouseX}px ${mouseY}px, hsl(var(--foreground) / 0.04), transparent 40%)`;
 
     return (
-        <motion.div
-            ref={itemRef}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-            className="group relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={() => setIsHovered(false)}
-            onMouseMove={handleMouseMove}
-            onClick={() => router.push(`/projects/${project.slug}`)}
-        >
+        <Link href={`/projects/${project.slug}`} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-2xl">
+            <motion.div
+                ref={itemRef}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="group relative"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={() => setIsHovered(false)}
+                onMouseMove={handleMouseMove}
+            >
             <motion.div
                 className={cn(
                     'relative cursor-pointer overflow-hidden rounded-2xl border-b border-border transition-colors duration-300',
@@ -228,7 +228,8 @@ function ProjectListRow({
                     )}
                 </AnimatePresence>
             )}
-        </motion.div>
+            </motion.div>
+        </Link>
     );
 }
 

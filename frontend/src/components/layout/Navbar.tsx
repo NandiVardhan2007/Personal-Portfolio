@@ -58,8 +58,36 @@ export function Navbar() {
     const [lastScrollY, setLastScrollY] = useState(0);
 
     useEffect(() => {
-        if (isMenuOpen) document.body.style.overflow = 'hidden';
-        else document.body.style.overflow = '';
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+            // Simple focus trap: prevent tabbing out of the menu
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Tab') {
+                    const focusableElements = document.querySelectorAll('.mobile-menu-item');
+                    const firstElement = focusableElements[0] as HTMLElement;
+                    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+                    
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstElement) {
+                            lastElement?.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastElement) {
+                            firstElement?.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            };
+            document.addEventListener('keydown', handleKeyDown);
+            return () => {
+                document.body.style.overflow = '';
+                document.removeEventListener('keydown', handleKeyDown);
+            };
+        } else {
+            document.body.style.overflow = '';
+        }
         return () => {
             document.body.style.overflow = '';
         };
@@ -124,8 +152,8 @@ export function Navbar() {
             )}
         >
             <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2">
-                    <span className="font-black text-lg tracking-tight leading-none text-foreground mt-[2px]">Nandu.</span>
+                <Link href="/" aria-label="Nandu Home" className="flex items-center gap-2">
+                    <span aria-hidden="true" className="font-black text-lg tracking-tight leading-none text-foreground mt-[2px]">Nandu.</span>
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8">
@@ -180,7 +208,7 @@ export function Navbar() {
                                     key={l.href}
                                     href={l.href}
                                     onClick={l.href.includes('#') ? (e) => handleSectionClick(e, l.href) : () => setIsMenuOpen(false)}
-                                    className="text-sm font-bold uppercase tracking-widest text-muted-foreground"
+                                    className="mobile-menu-item text-sm font-bold uppercase tracking-widest text-muted-foreground"
                                 >
                                     {l.label}
                                 </Link>
@@ -188,7 +216,7 @@ export function Navbar() {
                             <Link
                                 href="/contact"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-sm font-bold uppercase tracking-widest text-foreground mt-2 inline-block"
+                                className="mobile-menu-item text-sm font-bold uppercase tracking-widest text-foreground mt-2 inline-block"
                             >
                                 Contact
                             </Link>

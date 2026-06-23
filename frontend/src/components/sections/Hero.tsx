@@ -8,78 +8,20 @@ import { Github, Linkedin, Instagram, ArrowDownRight, Zap, Bot } from 'lucide-re
 import { portfolioData } from '@/data/portfolio';
 import { ProfileCard } from '@/components/ui/profile-card';
 import { Spotlight } from '@/components/ui/spotlight-new';
-import gsap from 'gsap';
 
 export function Hero({ isExiting }: { isExiting?: boolean }) {
     const { personal } = portfolioData;
     const [showProfile, setShowProfile] = useState(false);
-    const githubRef = useRef(null);
-    const linkedinRef = useRef(null);
-    const instagramRef = useRef(null);
-    const zapRef = useRef(null);
-    const botRef = useRef(null);
-
     const social = (platform: string) => personal.socialLinks.find((s) => s.platform === platform)?.url;
-
-    useEffect(() => {
-        if (!isExiting) return;
-
-        const ctx = gsap.context(() => {
-            gsap.fromTo(
-                githubRef.current,
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    onComplete: () => {
-                        gsap.to(githubRef.current, { y: -10, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-                    },
-                }
-            );
-            gsap.fromTo(
-                linkedinRef.current,
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    delay: 0.1,
-                    ease: 'power3.out',
-                    onComplete: () => {
-                        gsap.to(linkedinRef.current, { y: 10, duration: 2.5, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-                    },
-                }
-            );
-            gsap.fromTo(
-                instagramRef.current,
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    delay: 0.2,
-                    ease: 'power3.out',
-                    onComplete: () => {
-                        gsap.to(instagramRef.current, { x: 10, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-                    },
-                }
-            );
-            gsap.to(zapRef.current, { scale: 1.2, duration: 0.6, repeat: -1, yoyo: true, ease: 'power2.inOut' });
-            gsap.to(botRef.current, { rotation: 8, y: -10, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-        });
-
-        return () => ctx.revert();
-    }, [isExiting]);
+    const currentYear = new Date().getFullYear();
 
     return (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="relative min-h-screen w-full flex flex-col bg-background text-foreground overflow-hidden selection:bg-primary/20"
+            className="relative min-h-screen w-full flex flex-col bg-background text-foreground selection:bg-primary/20"
         >
-            <div className="w-full absolute h-full z-0 bg-[radial-gradient(circle,_#888_0.5px,_transparent_0.5px)] dark:bg-[radial-gradient(circle,_#444_0.5px,_transparent_0.5px)] opacity-20 [background-size:24px_24px]" />
+            <div aria-hidden="true" className="w-full absolute h-full z-0 bg-[radial-gradient(circle,_#888_0.5px,_transparent_0.5px)] dark:bg-[radial-gradient(circle,_#444_0.5px,_transparent_0.5px)] opacity-20 [background-size:24px_24px]" />
 
             <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden">
                 <Spotlight duration={10} xOffset={120} translateY={-300} />
@@ -98,45 +40,63 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                             Hi, I&apos;m {personal.nickname}. I build practical software, automations, and AI assistants.
                         </motion.p>
                         <div className="relative">
-                            <div ref={githubRef} className="absolute -top-6 right-2 md:-top-4 md:right-2 text-primary/60 hover:text-primary z-20 opacity-0">
-                                <a href={social('GitHub')} target="_blank" rel="noopener noreferrer" className="block">
-                                    <Github size={28} className="md:w-8 md:h-8" />
+                            <motion.div
+                                animate={isExiting ? { y: [0, 10, 0] } : {}}
+                                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                                className="absolute -top-6 right-2 md:-top-4 md:right-2 text-primary/60 hover:text-primary z-20"
+                            >
+                                <a href={social('GitHub')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border shadow-sm group">
+                                    <Github size={16} />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-primary">GitHub</span>
                                 </a>
-                            </div>
+                            </motion.div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3rem,12vw,13rem)] text-center md:text-left font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(2.5rem,10vw,13rem)] text-center md:text-left font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 SOFTWARE
                             </motion.h1>
                         </div>
                     </div>
 
-                    {/* Line 2 */}
                     <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center relative">
                         <div className="relative">
-                            <div ref={linkedinRef} className="absolute -top-6 left-0 md:-top-8 md:left-4 text-primary/60 hover:text-primary z-20 opacity-0">
-                                <a href={social('LinkedIn')} target="_blank" rel="noopener noreferrer" className="block">
-                                    <Linkedin size={28} className="md:w-8 md:h-8" />
+                            <motion.div
+                                animate={isExiting ? { y: [0, -10, 0] } : {}}
+                                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                                className="absolute -top-6 left-0 md:-top-8 md:left-4 text-primary/60 hover:text-primary z-20"
+                            >
+                                <a href={social('LinkedIn')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border shadow-sm group">
+                                    <Linkedin size={16} />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-primary">LinkedIn</span>
                                 </a>
-                            </div>
-                            <div ref={instagramRef} className="absolute -bottom-8 right-6 md:-bottom-12 md:right-36 text-primary/60 hover:text-primary z-20 opacity-0">
-                                <a href={social('Instagram')} target="_blank" rel="noopener noreferrer" className="block">
-                                    <Instagram size={28} className="md:w-8 md:h-8" />
+                            </motion.div>
+                            <motion.div
+                                animate={isExiting ? { y: [0, 10, 0] } : {}}
+                                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                                className="absolute -bottom-8 right-6 md:-bottom-12 md:right-36 text-primary/60 hover:text-primary z-20"
+                            >
+                                <a href={social('Instagram')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border shadow-sm group">
+                                    <Instagram size={16} />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-primary">Instagram</span>
                                 </a>
-                            </div>
+                            </motion.div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3rem,12vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                                className="text-[clamp(2.5rem,10vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                             >
                                 <span>AUTO</span>
-                                <div ref={zapRef} className="mx-[0.05em]">
+                                <motion.div
+                                    animate={isExiting ? { scale: [1, 1.2, 1] } : {}}
+                                    transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+                                    className="mx-[0.05em]"
+                                >
                                     <Zap className="w-[0.8em] h-[0.8em] text-sky-400" strokeWidth={1.5} />
-                                </div>
+                                </motion.div>
                                 <span>MATION</span>
                             </motion.h1>
                         </div>
@@ -148,12 +108,16 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                             initial={{ opacity: 0, y: 30 }}
                             animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-[clamp(3rem,12vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+                            className="text-[clamp(2.5rem,10vw,13rem)] flex flex-wrap items-center justify-center md:justify-start font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
                         >
                             <span>EN</span>
-                            <div ref={botRef} className="mx-[0.05em] relative">
+                            <motion.div
+                                animate={isExiting ? { rotate: [0, 8, 0, -8, 0], y: [0, -10, 0] } : {}}
+                                transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+                                className="mx-[0.05em] relative"
+                            >
                                 <Bot className="w-[0.85em] h-[0.85em] text-yellow-500 fill-yellow-500/10" />
-                            </div>
+                            </motion.div>
                             <span>GINEER</span>
                         </motion.h1>
 
@@ -172,7 +136,7 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                     <div className="flex flex-col sm:flex-row items-center gap-6">
                         <Separator className="flex-1 h-[1px] bg-foreground/10 hidden md:block" />
                         <div className="text-[10px] md:text-xs whitespace-nowrap font-bold tracking-[0.3em] text-muted-foreground uppercase">
-                            ANDHRA PRADESH, IN — 2026
+                            ANDHRA PRADESH, IN — {currentYear}
                         </div>
                         <ResumeButton className="group flex items-center">
                             <motion.div className="relative flex items-center bg-zinc-100 dark:bg-white h-12 w-12 group-hover:w-44 rounded-full transition-all duration-500 ease-smooth-out overflow-hidden shadow-xl">
@@ -188,14 +152,15 @@ export function Hero({ isExiting }: { isExiting?: boolean }) {
                 </div>
 
                 <div
-                    className="absolute left-0 top-1/2 z-50 hidden md:flex items-center transform -translate-y-1/2"
+                    className="absolute left-0 top-1/2 z-50 flex items-center transform -translate-y-1/2"
                     onMouseEnter={() => setShowProfile(true)}
                     onMouseLeave={() => setShowProfile(false)}
+                    onClick={() => setShowProfile(!showProfile)}
                 >
                     <div className="relative z-50">
                         <motion.div
                             whileHover={{ x: 10 }}
-                            className="bg-white text-black py-10 px-4 text-[10px] font-black uppercase tracking-[0.5em] shadow-2xl rounded-r-3xl border-r border-y border-zinc-200 cursor-pointer"
+                            className="bg-primary/5 hover:bg-primary/10 text-foreground py-10 px-4 text-[10px] font-black uppercase tracking-[0.5em] shadow-2xl rounded-r-3xl border-r border-y border-border cursor-pointer backdrop-blur-sm transition-colors"
                         >
                             <span className="rotate-0 [writing-mode:vertical-rl]">OPEN TO OPPORTUNITIES</span>
                         </motion.div>

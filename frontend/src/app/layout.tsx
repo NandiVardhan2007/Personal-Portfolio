@@ -15,7 +15,7 @@ import { inter, jetbrainsMono } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
 const { personal } = portfolioData;
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
@@ -61,12 +61,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 />
             </head>
             <body className={cn(inter.variable, jetbrainsMono.variable, 'font-sans')}>
+                <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-primary text-primary-foreground font-bold rounded-md transition-transform duration-200">
+                    Skip to content
+                </a>
                 <ThemeProvider>
                     <SmoothScrollProvider>
                         <ThemeAwareClickSpark>
                             <ConsoleEasterEgg />
                             <Navbar />
-                            <main>{children}</main>
+                            <main id="main-content">{children}</main>
                             <Footer />
                             <ErrorBoundary>
                                 <ChatBot />

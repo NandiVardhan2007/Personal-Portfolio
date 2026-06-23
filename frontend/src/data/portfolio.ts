@@ -15,7 +15,6 @@ export const portfolioData: PortfolioData = {
         avatar: `${CDN_BASE}/assets/Nandu.png`,
         location: 'Andhra Pradesh, India',
         email: 'kovvurinandivardhanreddy2007@gmail.com',
-        phone: '+91 7337419275',
         resumeUrl: `${CDN_BASE}/assets/Resume.pdf`,
         languages: [
             { name: 'Telugu', level: 'Native' },
@@ -36,10 +35,10 @@ export const portfolioData: PortfolioData = {
             id: 'jarvis-ai-assistant',
             slug: 'jarvis-ai-assistant',
             title: 'JARVIS AI Assistant',
-            description: 'A personal AI assistant project focused on automation and intelligent interaction.',
+            description: 'A personal AI assistant project focused on automation and intelligent interaction, powered by FastAPI and Go.',
             longDescription:
-                'JARVIS is an ongoing personal AI assistant and automation system, built as a productivity-focused companion that listens, reasons, and acts. It is the centerpiece of my AI and automation work — an evolving platform for exploring how voice, tool use, and memory come together into a single coherent assistant rather than a collection of disconnected scripts.',
-            techStack: ['Python', 'AI Agents', 'Automation'],
+                'JARVIS is an ongoing personal AI assistant and automation system, built as a productivity-focused companion that listens, reasons, and acts. Recently upgraded from a Python-only backend to a high-performance stack using FastAPI and Go. It is the centerpiece of my AI and automation work.',
+            techStack: ['Python', 'FastAPI', 'Go', 'AI Agents'],
             status: 'ongoing',
             featured: true,
             repoUrl: 'https://github.com/NandiVardhan2007/JARVIS',

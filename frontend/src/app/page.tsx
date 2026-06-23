@@ -5,6 +5,7 @@ import { TechStack } from '@/components/sections/TechStack';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
 import { AchievementsSection } from '@/components/sections/AchievementsSection';
 import { CodingStatsSection } from '@/components/sections/CodingStatsSection';
+import { TestimonialsSection } from '@/components/sections/Testimonials';
 import { ContactSection } from '@/components/sections/ContactSection';
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
             <ProjectsSection />
             <AchievementsSection />
             <CodingStatsSection />
+            <TestimonialsSection />
             <ContactSection />
         </>
     );

@@ -27,13 +27,6 @@ export const dynamic = 'force-dynamic';
  * reply if the client didn't specify it.
  */
 export async function POST(req: Request) {
-    if (!BASE_URL) {
-        return NextResponse.json(
-            { error: 'Service Unavailable: NIM_API_URL environment variable is not configured.' },
-            { status: 503 }
-        );
-    }
-
     let body: { messages?: NimMessage[]; model?: string; temperature?: number; max_tokens?: number; stream?: boolean };
     try {
         body = await req.json();
@@ -49,6 +42,10 @@ export async function POST(req: Request) {
     const messages = hasSystemMessage ? body.messages : [{ role: 'system' as const, content: buildSystemPrompt() }, ...body.messages];
 
     const wantsStream = body.stream ?? true;
+
+    if (!BASE_URL) {
+        return createFallbackResponse(wantsStream);
+    }
 
     const payload = {
         messages,
@@ -72,10 +69,7 @@ export async function POST(req: Request) {
         });
         clearTimeout(timeout);
     } catch (err: unknown) {
-        if (err instanceof Error && err.name === 'AbortError') {
-            return NextResponse.json({ error: 'The backend took too long to respond. Please try again.' }, { status: 504 });
-        }
-        return NextResponse.json({ error: 'Network error reaching the backend. Please try again later.' }, { status: 502 });
+        return createFallbackResponse(wantsStream);
     }
 
     if (!upstream.ok) {
@@ -86,10 +80,7 @@ export async function POST(req: Request) {
         } catch {
             /* upstream didn't return JSON */
         }
-        return NextResponse.json(
-            errBody ?? { error: `NIM API request failed with status ${upstream.status}.` },
-            { status: upstream.status }
-        );
+        return createFallbackResponse(wantsStream);
     }
 
     if (wantsStream && upstream.body) {
@@ -107,4 +98,30 @@ export async function POST(req: Request) {
     // Non-streaming: relay the full OpenAI-shaped completion as-is.
     const data = await upstream.json();
     return NextResponse.json(data);
+}
+
+function createFallbackResponse(stream: boolean) {
+    const fallbackMessage = "I'm currently offline and can't reach my AI backend right now. Please explore the portfolio or use the contact form to reach out to Nandu directly!";
+    
+    if (stream) {
+        const encoder = new TextEncoder();
+        const readable = new ReadableStream({
+            start(controller) {
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ choices: [{ delta: { content: fallbackMessage } }] })}\n\n`));
+                controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+                controller.close();
+            }
+        });
+        return new Response(readable, {
+            headers: {
+                'Content-Type': 'text/event-stream',
+                'Cache-Control': 'no-cache, no-transform',
+                Connection: 'keep-alive',
+            },
+        });
+    }
+    
+    return NextResponse.json({
+        choices: [{ message: { content: fallbackMessage } }]
+    });
 }
