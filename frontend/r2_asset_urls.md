@@ -35,3 +35,4 @@ https://pub-1bba152a6fe4451b8d45d1e11980038c.r2.dev/assets/Projects/flappy_bird/
 https://pub-1bba152a6fe4451b8d45d1e11980038c.r2.dev/assets/Projects/smart-apply/cover.png
 https://pub-1bba152a6fe4451b8d45d1e11980038c.r2.dev/assets/Projects/smart-apply/screenshot1.png
 https://pub-1bba152a6fe4451b8d45d1e11980038c.r2.dev/assets/Projects/smart-apply/screenshot2.png
+https://pub-1bba152a6fe4451b8d45d1e11980038c.r2.dev/assets/Projects/smart-apply/landing.png

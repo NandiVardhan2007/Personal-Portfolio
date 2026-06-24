@@ -93,6 +93,7 @@ export const portfolioData: PortfolioData = {
             ],
             cover: `${CDN_BASE}/assets/Projects/smart-apply/cover.png`,
             gallery: [
+                `${CDN_BASE}/assets/Projects/smart-apply/landing.png`,
                 `${CDN_BASE}/assets/Projects/smart-apply/screenshot1.png`,
                 `${CDN_BASE}/assets/Projects/smart-apply/screenshot2.png`,
             ],
