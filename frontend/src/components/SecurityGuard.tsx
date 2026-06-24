@@ -97,10 +97,10 @@ export function SecurityGuard() {
     <AnimatePresence>
       {warning && (
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] flex items-center gap-3 px-4 py-3 bg-red-600/95 text-white rounded-lg shadow-[0_10px_40px_-10px_rgba(220,38,38,0.5)] backdrop-blur-md border border-red-400"
+          initial={{ opacity: 0, y: 50, x: "-50%", scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9, x: "-50%", transition: { duration: 0.2 } }}
+          className="fixed bottom-6 left-1/2 z-[99999] flex items-center gap-3 px-4 py-3 bg-red-600/95 text-white rounded-lg shadow-[0_10px_40px_-10px_rgba(220,38,38,0.5)] backdrop-blur-md border border-red-400"
         >
           <AlertTriangle className="w-5 h-5 flex-shrink-0" />
           <span className="font-medium text-sm whitespace-nowrap">{warning}</span>
