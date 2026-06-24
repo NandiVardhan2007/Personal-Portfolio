@@ -32,36 +32,6 @@ export const portfolioData: PortfolioData = {
 
     projects: [
         {
-            id: 'smart-apply',
-            slug: 'smart-apply',
-            title: 'SmartApply — AI-Powered Job Application Automation',
-            description: 'SmartApply is an end-to-end, AI-driven automation platform designed to streamline the entire job application lifecycle.',
-            longDescription:
-                'SmartApply is an end-to-end, AI-driven automation platform designed to streamline the entire job application lifecycle. Job seekers can upload their resumes, and the platform’s custom Chrome extension automatically applies to LinkedIn jobs on their behalf. The system uses advanced LLMs (NVIDIA NIM - Llama 3.1 70B) to intelligently fill out application forms, generate tailored cover letters, and score job fit before applying. I have also used the vibe coding and then antigravity to build this.',
-            techStack: ['React', 'FastAPI', 'MongoDB', 'Redis', 'Python', 'WebSockets', 'Llama 3.1 70B'],
-            status: 'completed',
-            featured: true,
-            repoUrl: 'https://github.com/SmartApplyAi/Smart-Apply.git',
-            demoUrl: 'https://www.smartapplies.app/',
-            role: 'Creator & Developer',
-            team: 'Personal project',
-            category: 'AI & Web Automation',
-            highlights: [
-                'LinkedIn Easy Apply automation with AI',
-                'AI-Powered ATS Analyzer and Resume Scoring',
-                'Real-Time WebSocket Analytics Dashboard',
-                'Skill Gap Detection & Learning Roadmaps',
-                'Mock Interview Preparation',
-            ],
-            features: [
-                { title: 'LinkedIn Automation', items: ['Automatically fills LinkedIn Easy Apply forms', 'Skips low-match roles (< 65% match)'] },
-                { title: 'AI-Powered Analysis', items: ['Scores resumes against job descriptions (0-100)', 'Keyword matching and actionable suggestions', 'Identifies missing skills and generates learning plans'] },
-                { title: 'Interactive Tools', items: ['AI-driven mock interviews with real-time feedback', 'WebSockets live tracking dashboard', 'Automated weekly digest emails'] },
-            ],
-            cover: `${CDN_BASE}/assets/jarvis-cover.svg`,
-            gallery: [],
-        },
-        {
             id: 'jarvis-ai-assistant',
             slug: 'jarvis-ai-assistant',
             title: 'JARVIS AI Assistant',
@@ -93,6 +63,39 @@ export const portfolioData: PortfolioData = {
             ],
             cover: `${CDN_BASE}/assets/jarvis-cover.svg`,
             gallery: [],
+        },
+        {
+            id: 'smart-apply',
+            slug: 'smart-apply',
+            title: 'SmartApply — AI-Powered Job Application Automation',
+            description: 'SmartApply is an end-to-end, AI-driven automation platform designed to streamline the entire job application lifecycle.',
+            longDescription:
+                'SmartApply is an end-to-end, AI-driven automation platform designed to streamline the entire job application lifecycle. Job seekers can upload their resumes, and the platform’s custom Chrome extension automatically applies to LinkedIn jobs on their behalf. The system uses advanced LLMs (NVIDIA NIM - Llama 3.1 70B) to intelligently fill out application forms, generate tailored cover letters, and score job fit before applying. I have also used the vibe coding and then antigravity to build this.',
+            techStack: ['React', 'FastAPI', 'MongoDB', 'Redis', 'Python', 'WebSockets', 'Llama 3.1 70B'],
+            status: 'completed',
+            featured: true,
+            repoUrl: 'https://github.com/SmartApplyAi/Smart-Apply.git',
+            demoUrl: 'https://www.smartapplies.app/',
+            role: 'Creator & Developer',
+            team: 'Personal project',
+            category: 'AI & Web Automation',
+            highlights: [
+                'LinkedIn Easy Apply automation with AI',
+                'AI-Powered ATS Analyzer and Resume Scoring',
+                'Real-Time WebSocket Analytics Dashboard',
+                'Skill Gap Detection & Learning Roadmaps',
+                'Mock Interview Preparation',
+            ],
+            features: [
+                { title: 'LinkedIn Automation', items: ['Automatically fills LinkedIn Easy Apply forms', 'Skips low-match roles (< 65% match)'] },
+                { title: 'AI-Powered Analysis', items: ['Scores resumes against job descriptions (0-100)', 'Keyword matching and actionable suggestions', 'Identifies missing skills and generates learning plans'] },
+                { title: 'Interactive Tools', items: ['AI-driven mock interviews with real-time feedback', 'WebSockets live tracking dashboard', 'Automated weekly digest emails'] },
+            ],
+            cover: `${CDN_BASE}/assets/Projects/smart-apply/cover.png`,
+            gallery: [
+                `${CDN_BASE}/assets/Projects/smart-apply/screenshot1.png`,
+                `${CDN_BASE}/assets/Projects/smart-apply/screenshot2.png`,
+            ],
         },
         {
             id: 'atm-machine-simulator',
