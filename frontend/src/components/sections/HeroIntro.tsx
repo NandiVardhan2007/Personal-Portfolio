@@ -19,16 +19,11 @@ export function HeroIntro() {
     const [isExiting, setIsExiting] = useState(false);
 
     useEffect(() => {
-        const hasLoaded = sessionStorage.getItem('portfolioLoaded');
-        if (hasLoaded) {
-            setIsLoading(false);
-            setIsExiting(true);
-        }
+        // Animation plays every time
     }, []);
 
     const handleLoadingComplete = () => {
         setIsLoading(false);
-        sessionStorage.setItem('portfolioLoaded', 'true');
     };
 
     const handleExitStart = () => setIsExiting(true);

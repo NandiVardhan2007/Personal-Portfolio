@@ -15,7 +15,7 @@ function Column({ items, y, onSelect, className = '' }: ColumnProps) {
             className={`relative flex h-full flex-1 flex-col gap-[4vw] md:gap-[3vw] will-change-transform ${className}`}
             style={{ y, translateZ: 0 }}
         >
-            {items.map((item) => {
+            {items.map((item, i) => {
                 const handleClick = () => {
                     if (!item.pdfUrl) return;
                     if (window.innerWidth <= 768) {
@@ -27,7 +27,7 @@ function Column({ items, y, onSelect, className = '' }: ColumnProps) {
                 
                 return (
                 <button
-                    key={item.id}
+                    key={`${item.id}-${i}`}
                     onClick={handleClick}
                     aria-label={`View certificate for ${item.title}`}
                     className="group relative w-full overflow-hidden rounded-2xl bg-secondary ring-1 ring-border text-left"

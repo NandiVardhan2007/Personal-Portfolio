@@ -30,6 +30,7 @@ export function About() {
                                 fill
                                 sizes="(max-width: 768px) 100vw, 384px"
                                 className="object-cover"
+                                priority
                             />
                         </div>
                         <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">

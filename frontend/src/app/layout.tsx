@@ -13,6 +13,7 @@ import { Footer } from '@/components/layout/Footer';
 import { portfolioData } from '@/data/portfolio';
 import { inter, jetbrainsMono } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
+import { SecurityGuard } from '@/components/SecurityGuard';
 
 const { personal } = portfolioData;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             <ErrorBoundary>
                                 <ChatBot />
                             </ErrorBoundary>
+                            <SecurityGuard />
                         </ThemeAwareClickSpark>
                     </SmoothScrollProvider>
                 </ThemeProvider>

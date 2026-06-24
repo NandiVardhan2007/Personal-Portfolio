@@ -16,6 +16,7 @@ export interface ProfileCardProps {
   instagramUrl?: string;
   className?: string;
   onClose?: () => void;
+  priority?: boolean;
 }
 
 export function ProfileCard(props: ProfileCardProps) {
@@ -30,7 +31,8 @@ export function ProfileCard(props: ProfileCardProps) {
     linkedinUrl = "#",
     instagramUrl = "#",
     className,
-    onClose
+    onClose,
+    priority = false
   } = props;
 
   const socialIcons = [
@@ -62,7 +64,7 @@ export function ProfileCard(props: ProfileCardProps) {
             height={480}
             className='w-full h-full object-cover'
             draggable={false}
-            loading='lazy'
+            priority={priority}
           />
         </div>
         {/* Overlapping Card - Rectangular & Centered */}
@@ -119,7 +121,7 @@ export function ProfileCard(props: ProfileCardProps) {
             height={400}
             className='w-full h-full object-cover'
             draggable={false}
-            loading='lazy'
+            priority={priority}
           />
         </div>
 
