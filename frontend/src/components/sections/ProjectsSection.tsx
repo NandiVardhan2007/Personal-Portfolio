@@ -136,7 +136,7 @@ function ProjectListRow({
                     {/* Always-visible thumbnail — present at every breakpoint so the row
                         never looks bare on mobile/tablet where hover effects don't apply. */}
                     <motion.div
-                        className="shrink-0 relative w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden border border-border"
+                        className="shrink-0 relative w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden border border-border bg-secondary/30"
                         animate={{ scale: isHovered ? 1.04 : 1 }}
                         transition={{ duration: 0.3 }}
                     >
@@ -145,7 +145,7 @@ function ProjectListRow({
                             alt={project.title}
                             fill
                             sizes="96px"
-                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            className="object-contain p-1 grayscale group-hover:grayscale-0 transition-all duration-500"
                             unoptimized={project.cover.endsWith('.svg')}
                         />
                     </motion.div>
@@ -213,13 +213,13 @@ function ProjectListRow({
                             className="fixed pointer-events-none z-50 hidden xl:block"
                             style={{ left: cursorX, top: cursorY, x: '-50%', y: '-50%' }}
                         >
-                            <div className="w-[420px] h-[260px] rounded-2xl overflow-hidden border border-border backdrop-blur-xl relative shadow-2xl bg-secondary">
+                            <div className="w-[420px] h-[260px] rounded-2xl overflow-hidden border border-border backdrop-blur-xl relative shadow-2xl bg-secondary/80 flex items-center justify-center p-4">
                                 <Image
                                     src={project.cover}
                                     alt={project.title}
                                     fill
                                     sizes="420px"
-                                    className="object-cover opacity-90 grayscale"
+                                    className="object-contain p-4 opacity-90 grayscale"
                                     unoptimized={project.cover.endsWith('.svg')}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
@@ -282,13 +282,13 @@ function FeaturedSpotlight({ project }: { project: Project }) {
                     </span>
                 </div>
 
-                <div className="relative min-h-[220px] sm:min-h-[320px] lg:min-h-full">
+                <div className="relative min-h-[220px] sm:min-h-[320px] lg:min-h-full flex items-center justify-center p-4">
                     <Image
                         src={project.cover}
                         alt={project.title}
                         fill
                         sizes="(max-width: 1024px) 100vw, 45vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-contain transition-transform duration-700 group-hover:scale-105 p-6"
                         unoptimized={project.cover.endsWith('.svg')}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent lg:bg-gradient-to-l" />
