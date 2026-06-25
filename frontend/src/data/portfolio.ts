@@ -159,8 +159,8 @@ export const portfolioData: PortfolioData = {
                 { problem: 'Order of operations had to be handled correctly.', solution: 'Implemented structured expression handling.' },
                 { problem: 'Floating-point precision was tricky.', solution: 'Improved calculation logic and validation.' },
             ],
-            cover: `${CDN_BASE}/assets/Projects/Calculator/cal1.png`,
-            gallery: [`${CDN_BASE}/assets/Projects/Calculator/cal1.png`, `${CDN_BASE}/assets/Projects/Calculator/cal2.png`],
+            cover: `${CDN_BASE}/Projects/JAVA_Calculator/JAVA_Calculator.webp`,
+            gallery: [`${CDN_BASE}/Projects/JAVA_Calculator/JAVA_Calculator.webp`],
         },
         {
             id: 'flappy-bird-game',
@@ -369,16 +369,6 @@ export const portfolioData: PortfolioData = {
             tags: ['Project', 'Participation'],
             image: `${CDN_BASE}/Certificates/Project_Space/Project_Space_Certificate_Of_Participation_page1.webp`,
             pdfUrl: `${CDN_BASE}/Certificates/Project_Space/Project_Space_Certificate_Of_Participation.pdf`,
-        },
-        {
-            id: 'cert-project-space-offer',
-            title: 'Project Space Offer Letter',
-            issuer: 'Project Space',
-            description: 'Offer letter from Project Space.',
-            category: 'award',
-            tags: ['Offer', 'Career'],
-            image: `${CDN_BASE}/Certificates/Project_Space/Project_Space_Offer_Letter_page1.webp`,
-            pdfUrl: `${CDN_BASE}/Certificates/Project_Space/Project_Space_Offer_Letter.pdf`,
         },
     ],
 
